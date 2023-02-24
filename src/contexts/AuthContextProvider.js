@@ -1,4 +1,4 @@
-import React, { Children, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -53,12 +53,51 @@ const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    setUser("");
+    navigate("/");
+  };
+
+  const checkAuth = async () => {
+    console.log("WOrked");
+    let token = JSON.parse(localStorage.getItem("token"));
+
+    try {
+      const Authorization = `Bearer ${token.access}`;
+      let res = await axios.post(
+        `${API}api/token/refresh/`,
+        { refresh: token.refresh },
+        { headers: { Authorization } }
+      );
+
+      console.log(res);
+
+      localStorage.setItem(
+        "token",
+        JSON.stringify({
+          refresh: token.refresh,
+          access: res.data.access,
+        })
+      );
+
+      let username = localStorage.getItem("username");
+      setUser(username);
+    } catch (e) {
+      console.log(e);
+      logout();
+    }
+  };
+
   const values = {
     user,
     error,
 
     register,
     login,
+    logout,
+    checkAuth,
   };
 
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
