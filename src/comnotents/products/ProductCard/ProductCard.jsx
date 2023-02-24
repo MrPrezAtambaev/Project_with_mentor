@@ -8,9 +8,12 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import "./ProductCard.css";
 import { useNavigate } from "react-router-dom";
+import { useProducts } from "../../../contexts/ProductContextProvider";
 
 const ProductCard = ({ item }) => {
   const navigate = useNavigate();
+  const { deleteProduct } = useProducts();
+
   return (
     <Card sx={{ maxWidth: 300 }} className="postCard">
       <CardMedia
@@ -22,7 +25,9 @@ const ProductCard = ({ item }) => {
       <CardContent>
         <Grid container direction="column" spacing={1}>
           <Grid item>
-            <Typography variant="subtitle1">{item.name}</Typography>
+            <Typography variant="subtitle1" className="name">
+              {item.name}
+            </Typography>
           </Grid>
           <Grid item>
             <Typography variant="body2" color="text.secondary">
@@ -52,6 +57,7 @@ const ProductCard = ({ item }) => {
             },
             border: "1px solid red", // добавлено для изменения обводки
           }}
+          onClick={() => deleteProduct(item.id)}
         >
           Delete
         </Button>
@@ -68,6 +74,7 @@ const ProductCard = ({ item }) => {
             },
             border: "1px solid purple", // добавлено для изменения обводки
           }}
+          onClick={() => navigate(`/details/${item.id}`)}
         >
           Details
         </Button>
