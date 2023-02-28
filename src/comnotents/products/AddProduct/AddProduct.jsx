@@ -35,7 +35,7 @@ const AddProduct = () => {
 
   return (
     <Parallax
-      bgImage="https://wallbox.ru/wallpapers/preview/201728/14998387375965b91107d2f4.42145675.png"
+      bgImage="https://png.pngtree.com/thumb_back/fh260/background/20210809/pngtree-background-biru-keren-dan-kosong-abstract-untuk-template-desain-ppt-image_759974.jpg"
       bgImageAlt="background image"
       strength={150}
       blur={1}

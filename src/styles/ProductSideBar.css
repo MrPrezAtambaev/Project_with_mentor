@@ -1,0 +1,9 @@
+.sideBar {
+  width: 11%;
+  height: 90vh;
+  background: rgba(0, 0, 0, 0);
+}
+.input {
+  border-radius: 5px 5px;
+  width: 95%;
+}

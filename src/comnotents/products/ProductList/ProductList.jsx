@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useProducts } from "../../../contexts/ProductContextProvider";
 import ProductCard from "../ProductCard/ProductCard";
-import { Parallax } from "react-parallax";
 import Pagination from "@mui/material/Pagination";
 import "./ProductList.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const ProductList = () => {
+const ProductList = ({ changeSideBarStatus, page, setPage }) => {
   const { products, getProducts } = useProducts();
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     getProducts();
@@ -40,13 +38,11 @@ const ProductList = () => {
   });
 
   return (
-    <Parallax
-      bgImage="https://img.itch.zone/aW1nLzQ4NzU2MzQucG5n/315x250%23c/4Ti0%2BG.png"
-      bgImageAlt="background image"
-      strength={150}
-      blur={1}
-    >
-      <h3 style={{ textAlign: "center" }}>Products List</h3>
+    <div className="images">
+      <h3 style={{ textAlign: "center", marginBottom: "0" }}>Products List</h3>
+      <button className="custom-btn btn-3" onClick={changeSideBarStatus}>
+        <span>Filter&Search Menu</span>
+      </button>
       <div className="posts-list">
         {products ? (
           currentData().map((item) => <ProductCard key={item.id} item={item} />)
@@ -61,10 +57,9 @@ const ProductList = () => {
           onChange={handlePage}
           color="secondary"
           className="pagination2"
-          style={{ color: "white" }}
         />
       </ThemeProvider>
-    </Parallax>
+    </div>
   );
 };
 

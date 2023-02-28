@@ -25,7 +25,7 @@ const ProductDetails = () => {
             <div className="product-details-image-container">
               <img
                 src={productDetails.picture}
-                alt="Product image"
+                alt=""
                 className="product-details-image"
               />
             </div>
@@ -35,7 +35,9 @@ const ProductDetails = () => {
                 {productDetails.description}
               </p>
               <p className="product-details-price">${productDetails.price}</p>
-              <p className="product-details-price">{productDetails.type}</p>
+              <p className="product-details-price">
+                Category: {productDetails.type}
+              </p>
             </div>
           </>
         ) : (

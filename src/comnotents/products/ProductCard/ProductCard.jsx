@@ -9,17 +9,21 @@ import Grid from "@mui/material/Grid";
 import "./ProductCard.css";
 import { useNavigate } from "react-router-dom";
 import { useProducts } from "../../../contexts/ProductContextProvider";
+import { useCart } from "../../../contexts/CartContextProvider";
+import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import IconButton from "@mui/material/IconButton";
 
 const ProductCard = ({ item }) => {
   const navigate = useNavigate();
   const { deleteProduct } = useProducts();
+  const { addProductToCart, checkProductInCart } = useCart();
 
   return (
     <Card sx={{ maxWidth: 300 }} className="postCard">
       <CardMedia
         sx={{ height: 200 }}
         image={item.picture}
-        title="green iguana"
+        title={item.name}
         className="post-card"
       />
       <CardContent>
@@ -95,6 +99,12 @@ const ProductCard = ({ item }) => {
         >
           Edit
         </Button>
+
+        <IconButton size="small" onClick={() => addProductToCart(item)}>
+          <AddShoppingCartOutlinedIcon
+            color={checkProductInCart(item.id) ? "primary" : ""}
+          />
+        </IconButton>
       </CardActions>
     </Card>
   );
